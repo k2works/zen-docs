@@ -1,5 +1,5 @@
 @startuml
-title 境界づけられたコンテキス内のドメインルール
+title 境界づけられたコンテキスト内のドメインルール
 
 package "Eコマース事業" {
     [販売管理] as SalesManagement

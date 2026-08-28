@@ -1,5 +1,5 @@
 @startuml
-title 境界づけられたコンテキス内のイベント
+title 境界づけられたコンテキスト内のイベント
 
 package "Eコマース事業" {
     [販売管理] as SalesManagement

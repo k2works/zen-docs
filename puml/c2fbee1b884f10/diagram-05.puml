@@ -1,7 +1,7 @@
 @startuml
-title 境界づけられたコンテキス内のビジネス用語とDDD技術用語の対応関係
+title 境界づけられたコンテキスト内のビジネス用語とDDD技術用語の対応関係
 
-package 境界づけられたコンテキス {
+package 境界づけられたコンテキスト {
 package 業務の言葉 {
     [Business Entities]
     [Business Rules]

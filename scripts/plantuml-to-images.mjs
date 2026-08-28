@@ -16,7 +16,7 @@ import path from 'node:path';
 const ROOT = path.resolve(import.meta.dirname, '..');
 const SERVER = (process.env.PLANTUML_SERVER ?? 'https://www.plantuml.com/plantuml').replace(/\/+$/, '');
 const FORMAT = process.env.PLANTUML_FORMAT ?? 'png';
-const FENCE = /^([ \t]*)(`{3,}|~{3,})[ \t]*(plantuml|puml|uml)[ \t]*$/i;
+const FENCE = /^([ \t]*)(`{3,}|~{3,})[ \t]*(plantuml|puml|uml)[ \t\r]*$/i;
 
 // PlantUML テキストエンコーディング (deflate + 独自 base64 アルファベット)
 function encodePlantuml(source) {
@@ -55,7 +55,7 @@ function findBlocks(lines) {
     const m = lines[i].match(FENCE);
     if (!m) continue;
     const [, indent, fence] = m;
-    const closer = new RegExp(`^[ \t]*${fence[0]}{${fence.length},}[ \t]*$`);
+    const closer = new RegExp(`^[ \t]*${fence[0]}{${fence.length},}[ \t\r]*$`);
     let end = -1;
     for (let j = i + 1; j < lines.length; j++) {
       if (closer.test(lines[j])) { end = j; break; }
@@ -86,7 +86,9 @@ async function nextIndex(dir) {
 async function convert(file, dryRun) {
   const abs = path.resolve(ROOT, file);
   const text = await readFile(abs, 'utf8');
-  const lines = text.split('\n');
+  // CRLF の Markdown でもフェンスを検出できるよう改行コードを正規化し、元の改行で書き戻す
+  const eol = text.includes('\r\n') ? '\r\n' : '\n';
+  const lines = text.split(/\r?\n/);
   const blocks = findBlocks(lines);
   if (blocks.length === 0) {
     console.log(`- ${file}: plantuml ブロックなし`);
@@ -117,7 +119,7 @@ async function convert(file, dryRun) {
   for (const { name, image, block } of results) {
     await writeFile(path.join(imageDir, `${name}.${FORMAT}`), image);
     // 再生成できるよう PlantUML のソースも残す
-    await writeFile(path.join(pumlDir, `${name}.puml`), `${block.source}\n`, 'utf8');
+    await writeFile(path.join(pumlDir, `${name}.puml`), block.source.split('\n').join(eol) + eol, 'utf8');
   }
 
   // 後ろから置換して行番号のずれを防ぐ
@@ -125,7 +127,7 @@ async function convert(file, dryRun) {
     const link = `${block.indent}![${alt}](/images/${slug}/${name}.${FORMAT})`;
     lines.splice(block.start, block.end - block.start + 1, link);
   }
-  await writeFile(abs, lines.join('\n'), 'utf8');
+  await writeFile(abs, lines.join(eol), 'utf8');
   console.log(`- ${file}: ${results.length} 件を画像に変換`);
   return results.length;
 }

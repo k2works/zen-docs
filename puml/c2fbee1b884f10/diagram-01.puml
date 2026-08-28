@@ -1,0 +1,15 @@
+@startuml
+title 図1-1 Eコマース事業問題領域
+
+package "Eコマース事業" {
+    [販売管理] as SalesManagement
+}
+
+package 問題領域
+package コアビジネスドメイン
+package 事業課題
+
+"Eコマース事業" --> "問題領域"
+"Eコマース事業" --> "コアビジネスドメイン"
+"Eコマース事業" --> "事業課題"
+@enduml

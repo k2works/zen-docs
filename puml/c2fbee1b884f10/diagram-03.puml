@@ -1,0 +1,22 @@
+@startuml
+title 単一の境界づけられたコンテキスト内のサブドメイン
+
+package "Eコマース事業" {
+    [販売管理] as SalesManagement
+}
+
+package 販売管理コンテキスト {
+    package "受注"
+    package "在庫"
+    package "出荷"
+    package "配送"
+    package "決済"
+}
+
+"Eコマース事業" --> "受注"
+"Eコマース事業" --> "在庫"
+"Eコマース事業" --> "出荷"
+"Eコマース事業" --> "配送"
+"Eコマース事業" --> "決済"
+
+@enduml

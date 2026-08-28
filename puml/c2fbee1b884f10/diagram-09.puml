@@ -1,0 +1,19 @@
+@startuml
+title 境界づけられたコンテキス内のイベント
+
+package "Eコマース事業" {
+    [販売管理] as SalesManagement
+}
+
+package 受注コンテキスト {
+    package "受注" {
+          [受注登録]
+          [受注更新]
+          [受注キャンセル]
+    }
+}
+
+
+"Eコマース事業" --> "受注"
+
+@enduml

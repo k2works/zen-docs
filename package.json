@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "article": "zenn new:article",
+    "book": "zenn new:book",
+    "preview": "zenn preview",
+    "plantuml": "node scripts/plantuml-to-images.mjs",
+    "plantuml:dry": "node scripts/plantuml-to-images.mjs --dry-run"
   },
   "repository": {
     "type": "git",

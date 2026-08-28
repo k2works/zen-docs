@@ -1,0 +1,26 @@
+@startuml
+title 境界づけられたコンテキス内のビジネス用語とDDD技術用語の対応関係
+
+package 境界づけられたコンテキス {
+package 業務の言葉 {
+    [Business Entities]
+    [Business Rules]
+    [Business Flows]
+    [Business Operations]
+    [Business Events]
+}
+package DDDの技術用語 {
+    [Aggregates/Entities/Value Objects]
+    [Domain Rules]
+    [Sagas]
+    [Commands/Queries]
+    [Events]
+}
+
+[Business Entities] --> [Aggregates/Entities/Value Objects]
+[Business Rules] --> [Domain Rules]
+[Business Flows] --> [Sagas]
+[Business Operations] --> [Commands/Queries]
+[Business Events] --> [Events]
+
+@enduml

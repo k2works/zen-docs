@@ -1,0 +1,48 @@
+@startuml
+title マイクロサービス Cargo Tracker Application
+
+package 問題領域 {
+   [Booking Sub-Domain]
+   [Tracking Sub-Domain]
+   [Routing Sub-Domain]
+   [Handling Sub-Domain]
+}
+
+package "Cargo Tracker Micro Services" {
+   package "Booking MS" {
+     [Domain Model<<Booking>>]
+   }
+   package "Routing MS" {
+     [Domain Model<<Routing>>]
+   }
+   package "Tracking MS" {
+     [Domain Model<<Tracking>>]
+   }
+   package "Handling MS" {
+     [Domain Model<<Handling>>]
+   }
+}
+
+database DB_1 [
+データベース
+]
+database DB_2 [
+データベース
+]
+database DB_3 [
+データベース
+]
+database DB_4 [
+データベース
+]
+
+[Booking Sub-Domain] --> "Booking MS"
+[Routing Sub-Domain] --> "Routing MS"
+[Tracking Sub-Domain] --> "Tracking MS"
+[Handling Sub-Domain] --> "Handling MS"
+"Booking MS" --> DB_1
+"Routing MS" --> DB_2
+"Tracking MS" --> DB_3
+"Handling MS" --> DB_4
+
+@enduml

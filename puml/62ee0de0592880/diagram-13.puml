@@ -1,0 +1,17 @@
+@startuml
+
+title Booking Saga
+
+start
+
+partition "Booking Bounded Context" {
+  :Cargo Booking;
+  :Cargo Routing;
+}
+partition "Tracking Bounded Context" {
+   :Cargo Tracking;
+}
+
+end
+
+@enduml

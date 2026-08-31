@@ -1,0 +1,25 @@
+@startuml
+
+title Handling Saga
+
+start
+partition "Handling Bounded Context" {
+:Cargo Handling;
+}
+fork;
+partition "Handling Bounded Context" {
+  :Cargo Inspection;
+}
+stop
+  
+forkagain;
+partition "Handling Bounded Context" {
+  :Cargo Claims;
+}
+partition "Tracking Bounded Context" {
+  :Cargo Settlement;
+}
+endfork;
+end
+
+@enduml

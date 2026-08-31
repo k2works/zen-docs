@@ -1,0 +1,35 @@
+@startuml
+title モジュラーモノリス Cargo Tracker Application
+
+package 問題領域 {
+   [Booking Sub-Domain]
+   [Tracking Sub-Domain]
+   [Routing Sub-Domain]
+   [Handling Sub-Domain]
+}
+
+package "Cargo Tracker Monolith" {
+   package "Booking Module" {
+     [Domain Model<<Booking>>]
+   }
+   package "Routing Module" {
+     [Domain Model<<Routing>>]
+   }
+   package "Tracking Module" {
+     [Domain Model<<Tracking>>]
+   }
+   package "Handling Module" {
+     [Domain Model<<Handling>>]
+   }
+}
+
+database DB [
+データベース
+]
+
+[Booking Sub-Domain] --> "Booking Module"
+[Routing Sub-Domain] --> "Routing Module"
+[Tracking Sub-Domain] --> "Tracking Module"
+[Handling Sub-Domain] --> "Handling Module"
+"Cargo Tracker Monolith" --> DB
+@enduml

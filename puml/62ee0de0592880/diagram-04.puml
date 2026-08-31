@@ -1,0 +1,16 @@
+@startuml
+title Cargo Trackerの境界づけられたコンテキスト内の集約
+
+package "Booking Bounded Context" {
+    class Cargo
+}
+package "Handling Bounded Context" {
+    class HandlingActivity
+}
+package "Routing Bounded Context" {
+    class Voyage
+}
+package "Tracking Bounded Context" {
+    class TrackingActivity
+}
+@enduml

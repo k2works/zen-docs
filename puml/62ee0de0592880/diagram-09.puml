@@ -1,0 +1,12 @@
+@startuml
+title 公開集約クラス図
+
+class Voyage<<Aggregates>>
+class VoyageNumber<<Entities>>
+class Schedule<<Value Objects>>
+class CarrierMovements<<Value Objects>>
+
+Voyage --> VoyageNumber
+Voyage --> Schedule
+Schedule --> CarrierMovements
+@enduml

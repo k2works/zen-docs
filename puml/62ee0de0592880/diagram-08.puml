@@ -1,0 +1,15 @@
+@startuml
+title 荷役クラス図
+
+class HandlingActivity<<Aggregates>>
+class Type<<Value Objects>>
+class VoyageNumber<<Entities>>
+class HandlingLocation<<Entities>>
+class CargoDetails<<Entities>>
+
+HandlingActivity -> Type
+HandlingActivity --> VoyageNumber
+HandlingActivity --> HandlingLocation
+HandlingActivity --> CargoDetails
+
+@enduml

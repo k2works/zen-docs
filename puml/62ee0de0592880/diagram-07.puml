@@ -1,0 +1,76 @@
+@startuml
+title 荷物集約クラス図
+
+class BookingId<<Entity>> {
+    + BookingId: String
+}
+
+class Cargo<<Aggregates>> {
+    + bookingId: BookingId
+    + bookingAmount: BookingAmount
+    + origin: Location
+    + routeSpecification: RouteSpecification
+    + itinerary: Itinerary
+    + delivery: Delivery
+}
+
+class BookingAmount<<Value Objects>> {
+    + bookingAmount: int
+}
+
+class Location<<Value Objects>> {
+    + unLocCode: String
+}
+
+class CargoItinerary<<Value Objects>> {
+    + legs: List<Leg>
+}
+
+class RouteSpecification<<Value Objects>> {
+    + origin: Location
+    + destination: Location
+    + arrivalDeadline: Date
+}
+
+class Delivery<<Value Objects>> {
+    + routingStatus: RoutingStatus
+    + transportStatus: TransportStatus
+    + arrivalDeadline: Date
+    + lastKnownLocation: Location
+    + currentVoyage: Voyage
+    + nextExpectedActivity: CargoHandlingActivity
+    + lastHandledEvent: LastCargoHandleEvent
+}
+
+class Leg<<Value Objects>> {
+    + voyageNumber: VoyageNumber
+    + fromUnLocCode: String
+    + toUnLocCode: String
+    + loadTime: String
+    + unloadTime: String
+}
+
+class Voyage<<Entity>>
+
+class CargoHandlingActivity<<Entity>>
+
+class LastCargoHandleEvent<<Entity>>
+
+class TransportStatus<<Value Objects>>
+
+class RoutingStatus<<Value Objects>>
+
+BookingId <-- Cargo
+Cargo --> BookingAmount
+Cargo --> Location
+Cargo --> CargoItinerary
+Cargo -> RouteSpecification
+Cargo --> Delivery
+CargoItinerary --> Leg
+Delivery --> Voyage
+Delivery --> CargoHandlingActivity
+Delivery --> LastCargoHandleEvent
+Delivery --> RoutingStatus
+Delivery --> TransportStatus
+
+@enduml

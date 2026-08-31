@@ -1,0 +1,16 @@
+@startuml
+title 追跡クラス図
+
+class TrackingId<<Entities>>
+class TrackingActivity<<Aggregates>>
+class HandlingEvent<<Entities>>
+class Location<<Entities>>
+class VoyageNumber<<Entities>>
+class EventDetails<<Entities>>
+
+TrackingId <-- TrackingActivity
+TrackingActivity -> HandlingEvent
+HandlingEvent --> Location
+HandlingEvent --> VoyageNumber
+HandlingEvent --> EventDetails
+@enduml

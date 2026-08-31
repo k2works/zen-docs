@@ -1,0 +1,16 @@
+@startuml
+
+start
+partition "High Level Artifacts" {
+    :サブドメインを特定する;
+    :境界づけられたコンテキストを特定する;
+}
+partition "Low Level Artifacts" {
+    :ドメインモデルを特定する;
+    :ドメインモデルオペレーションを特定する;
+    :長いトランザクションを特定する(サガ);
+    :ドメインモデルサービスを特定する;
+}
+end
+
+@enduml

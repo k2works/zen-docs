@@ -1,0 +1,32 @@
+@startuml
+title エンティティの例
+
+class Location<<Entity>>
+
+class Cargo<<Aggregates>> {
+    + orinLocation: Location
+}
+
+class TrackingActivity<<Aggregates>> {
+    + location: Location
+    + voyage: Voyage
+    + event: HandlingEvent
+}
+
+class HandlingActivity<<Aggregates>> {
+    +  handlingLocation: Location
+    + voyage: Voyage
+}
+
+class HandlingEvent<<Entity>>
+
+class Voyage<<Entity>>
+
+Location <-- Cargo
+Location <-- TrackingActivity
+Location <-- HandlingActivity
+TrackingActivity --> HandlingEvent
+TrackingActivity --> Voyage
+HandlingActivity --> Voyage
+
+@enduml

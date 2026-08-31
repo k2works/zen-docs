@@ -1,0 +1,93 @@
+@startuml
+
+title マイクロサービスアーキテクチャ内のドメインモデルサービス
+
+skinparam component {
+    BackgroundColor<<Inbound Services>> #D6EAF8
+    BackgroundColor<<Outbound Services>> #D5F5E3
+    BackgroundColor<<Application Services>> #FADBD8
+}
+
+package "Cargo Tracker Microservice" {
+  package "Booking Microservice" {
+    [REST API] <<Inbound Services>> as 1_1
+    [Event API] <<Inbound Services>> as 1_2
+    [Repositories] <<Outbound Services>> as 1_4
+    [Brokers] <<Outbound Services>> as 1_5
+    usecase BookingDomainModel<<Application Services>> [
+      Booking Domain Model 
+    ] 
+    
+    1_1 --> BookingDomainModel
+    1_2 --> BookingDomainModel 
+    BookingDomainModel --> 1_4 
+    BookingDomainModel --> 1_5 
+  }
+
+  package "Tracking Microservice" {
+    [REST API] <<Inbound Services>> as 2_1
+    [Event API] <<Inbound Services>> as 2_2
+    [Repositories] <<Outbound Services>> as 2_4
+    [Brokers] <<Outbound Services>> as 2_5
+    usecase TrackingDomainModel<<Application Services>> [
+      Tracking Domain Model 
+    ] 
+    
+    2_1 --> TrackingDomainModel
+    2_2 --> TrackingDomainModel 
+    TrackingDomainModel --> 2_4 
+    TrackingDomainModel --> 2_5
+  }
+  
+  package "Routing Microservice" {
+    [REST API] <<Inbound Services>> as 3_1
+    [Event API] <<Inbound Services>> as 3_2
+    [Repositories] <<Outbound Services>> as 3_4
+    [Brokers] <<Outbound Services>> as 3_5
+    usecase RoutingDomainModel<<Application Services>> [
+      Routing Domain Model 
+    ] 
+    
+    3_1 --> RoutingDomainModel
+    3_2 --> RoutingDomainModel 
+    RoutingDomainModel --> 3_4 
+    RoutingDomainModel --> 3_5
+  }
+  
+  package "Hnadling Microservice" {
+    [REST API] <<Inbound Services>> as 4_1
+    [Event API] <<Inbound Services>> as 4_2
+    [Repositories] <<Outbound Services>> as 4_4
+    [Brokers] <<Outbound Services>> as 4_5
+    usecase HandlingDomainModel<<Application Services>> [
+      Handling Domain Model 
+    ] 
+    
+    4_1 --> HandlingDomainModel
+    4_2 --> HandlingDomainModel 
+    HandlingDomainModel --> 4_4 
+    HandlingDomainModel --> 4_5
+  } 
+}
+
+package "External Services" {
+  database DB_1 [
+    Booking DB
+  ]
+  database DB_2 [
+    Routing DB
+  ]
+  database DB_3 [
+    Tracking DB
+  ]
+  database DB_4 [
+    Handling DB
+  ]
+  queue BUS_1 [
+    Message Broker
+  ]
+}
+
+"Cargo Tracker Microservice" --> "External Services"
+
+@enduml

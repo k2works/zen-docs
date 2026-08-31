@@ -1,0 +1,81 @@
+@startuml
+title 境界づけられたコンテキスト内のドメインモデルオペレーション
+
+left to right direction
+
+skinparam component {
+    BackgroundColor<<Command>> #D6EAF8
+    BackgroundColor<<Query>> #D5F5E3
+    BackgroundColor<<Event>> #FADBD8
+    BorderColor<<Command>> #2E86C1
+    BorderColor<<Query>> #28B463
+    BorderColor<<Event>> #CB4335
+}
+
+package "Cargo Tracker Monolith" {
+    package "Booking Module" as BookingModule {
+        [Assign Route to Cargo] <<Command>>
+        [Book Cargo] <<Command>>
+        [Cargo Details] <<Query>>
+        
+        usecase Booking [
+          Booking
+        ]
+    }
+    
+    package "Tracking Module" as TrackingModule {
+        [Assign Tracker to Cargo] <<Command>>
+        [Track Cargo] <<Query>>
+        
+        usecase Tracking [
+          Tracking
+        ]
+    }
+    
+    [Cargo Booked] <<Event>>
+    [Cargo Routed] <<Event>>
+    [Cargo Handled] <<Event>>
+    
+    package "Routing Module" as RoutingModule {
+        usecase Routing [
+          Routing
+        ]
+        
+        [Get Itinerary for Route] <<Query>>
+        [Maintain Voyages] <<Command>>
+    }
+    
+    package "Handling Module" as HandlingModule {
+        usecase Handling [
+          Handling
+        ]
+        
+        [Register Handling Activity] <<Command>>
+        [Handling History Details] <<Query>>
+    }
+}
+
+BookingModule -[hidden]right-> TrackingModule
+BookingModule -[hidden]down-> RoutingModule
+RoutingModule -[hidden]right-> HandlingModule
+
+[Assign Route to Cargo] --> Booking
+[Book Cargo] --> Booking
+[Cargo Details] --> Booking
+Booking --> [Get Itinerary for Route] : REST API
+Booking --> [Cargo Booked] : publish
+Booking --> [Cargo Routed] : publish
+Booking --> [Cargo Handled] : subscribe
+
+[Assign Tracker to Cargo] --> Tracking
+[Track Cargo] --> Tracking
+Tracking --> [Cargo Routed] : subscribe
+Tracking --> [Cargo Handled] : subscribe
+
+Routing <-- [Get Itinerary for Route]
+Routing <-- [Maintain Voyages]
+
+Handling <-- [Register Handling Activity]
+Handling <-- [Handling History Details]
+Handling --> [Cargo Handled] : publish
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+title 境界づけられたコンテキスト内のシステムオペレーション
+
+[Request a change of state]
+[Request the state]
+[Notify the state change]
+
+package "Bounded Context" {
+   [Command]
+   [Query]
+   [Event]
+}
+
+[Request a change of state] --> [Command]
+[Request the state] --> [Query]
+[Event] --> [Notify the state change]
+@enduml

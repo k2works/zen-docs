@@ -1,0 +1,92 @@
+@startuml
+
+title モノリスアーキテクチャ内のドメインモデルサービス
+
+skinparam component {
+    BackgroundColor<<Inbound Services>> #D6EAF8
+    BackgroundColor<<Outbound Services>> #D5F5E3
+    BackgroundColor<<Application Services>> #FADBD8
+}
+
+package "Cargo Tracker Monolith" {
+  package "Booking Module" {
+    [REST API] <<Inbound Services>> as 1_1
+    [Event API] <<Inbound Services>> as 1_2
+    [Web API] <<Inbound Services>> as 1_3
+    [Repositories] <<Outbound Services>> as 1_4
+    [Brokers] <<Outbound Services>> as 1_5
+    usecase BookingDomainModel<<Application Services>> [
+      Booking Domain Model 
+    ] 
+    
+    1_1 --> BookingDomainModel
+    1_2 --> BookingDomainModel 
+    1_3 --> BookingDomainModel 
+    BookingDomainModel --> 1_4 
+    BookingDomainModel --> 1_5 
+  }
+
+  package "Tracking Module" {
+    [REST API] <<Inbound Services>> as 2_1
+    [Event API] <<Inbound Services>> as 2_2
+    [Web API] <<Inbound Services>> as 2_3
+    [Repositories] <<Outbound Services>> as 2_4
+    [Brokers] <<Outbound Services>> as 2_5
+    usecase TrackingDomainModel<<Application Services>> [
+      Tracking Domain Model 
+    ] 
+    
+    2_1 --> TrackingDomainModel
+    2_2 --> TrackingDomainModel 
+    2_3 --> TrackingDomainModel 
+    TrackingDomainModel --> 2_4 
+    TrackingDomainModel --> 2_5
+  }
+  
+  package "Routing Module" {
+    [REST API] <<Inbound Services>> as 3_1
+    [Event API] <<Inbound Services>> as 3_2
+    [Web API] <<Inbound Services>> as 3_3
+    [Repositories] <<Outbound Services>> as 3_4
+    [Brokers] <<Outbound Services>> as 3_5
+    usecase RoutingDomainModel<<Application Services>> [
+      Routing Domain Model 
+    ] 
+    
+    3_1 --> RoutingDomainModel
+    3_2 --> RoutingDomainModel 
+    3_3 --> RoutingDomainModel 
+    RoutingDomainModel --> 3_4 
+    RoutingDomainModel --> 3_5
+  }
+  
+  package "Hnadling Module" {
+    [REST API] <<Inbound Services>> as 4_1
+    [Event API] <<Inbound Services>> as 4_2
+    [Web API] <<Inbound Services>> as 4_3
+    [Repositories] <<Outbound Services>> as 4_4
+    [Brokers] <<Outbound Services>> as 4_5
+    usecase HandlingDomainModel<<Application Services>> [
+      Handling Domain Model 
+    ] 
+    
+    4_1 --> HandlingDomainModel
+    4_2 --> HandlingDomainModel 
+    4_3 --> HandlingDomainModel 
+    HandlingDomainModel --> 4_4 
+    HandlingDomainModel --> 4_5
+  } 
+}
+
+package "External Services" {
+  database DB_1 [
+    CargoTracker DB
+  ]
+  queue BUS_1 [
+    Event Bus
+  ]
+}
+
+"Cargo Tracker Monolith" --> "External Services"
+
+@enduml

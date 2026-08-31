@@ -1,0 +1,26 @@
+@startuml
+title ビジネスキーを使った集約識別子の特定
+
+package "Booking Bounded Context" {
+    class BookingId
+    class Cargo
+}
+package "Handling Bounded Context" {
+    class ActivityId
+    class HandlingActivity
+}
+package "Routing Bounded Context" {
+    class VoyageNumber
+    class Voyage
+}
+package "Tracking Bounded Context" {
+    class TrackingId
+    class TrackingActivity
+}
+
+BookingId <-- Cargo
+ActivityId <-- HandlingActivity
+VoyageNumber <-- Voyage
+TrackingId <-- TrackingActivity
+
+@enduml

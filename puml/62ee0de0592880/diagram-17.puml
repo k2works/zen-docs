@@ -1,0 +1,45 @@
+@startuml
+
+title ヘキサゴナルアーキテクチャパターン
+
+rectangle "Inbound Adapter" as iface #LightBlue {
+  [REST API]
+  [Native Web API]
+  [Event API]
+}
+
+hexagon "Application" as application {
+  rectangle "Port" {
+    interface ApplicationService as port_1
+    interface ApplicationService as port_2
+    interface ApplicationService as port_3
+  }
+  hexagon "Domain Model" as domain {
+    [Business Logic]
+  }
+}
+
+rectangle "Outbound Adapter" as infra #LightGreen {
+  [Messagin Repository]
+  [Database Repository]
+}
+
+queue ms_1 [
+  Messaging Channel
+]
+
+database db_1 [
+  Database
+]
+
+[REST API] --> port_1
+[Native Web API] --> port_1
+[Event API] --> port_1
+port_2 --> [Messagin Repository]
+port_3 --> [Database Repository]
+
+[Messagin Repository] --> ms_1
+ms_1 --> [Event API]
+[Database Repository] --> db_1
+
+@enduml

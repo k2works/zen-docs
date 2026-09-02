@@ -1,0 +1,39 @@
+@startuml
+
+title 境界づけられたコンテキスト内の集約
+
+left to right direction
+
+usecase Booking
+usecase Tracking
+usecase Routing
+usecase Handling
+
+rectangle C_Cargo <<Aggregate>> [
+Cargo
+==
++ bookingId
+--
+]
+rectangle C_Voyage <<Aggregate>> [
+Voyage
+==
++ voyageNumber
+]
+rectangle C_TrackingActivity <<Aggregate>> [
+TrackingActivity
+==
++ trackingId
+]
+rectangle C_HandlingActivity <<Aggregate>> [
+HandlingActivity
+==
++ activityId
+]
+
+Booking ..> C_Cargo
+Routing ..> C_Voyage
+Tracking ..> C_TrackingActivity
+Handling ..> C_HandlingActivity
+
+@enduml

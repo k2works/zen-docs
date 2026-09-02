@@ -1,0 +1,27 @@
+@startuml
+title Package structure for the infrastructure components
+
+left to right direction
+
+package {
+    [messaging.broker]
+}
+package {
+    [infrastructure]
+}
+package {
+    [persistence.jpa]
+}
+package {
+    [events]
+}
+package {
+    [persistence.jnosql]
+}
+
+[infrastructure] -> [messaging.broker]
+[infrastructure] --> [persistence.jpa]
+[infrastructure] --> [events]
+[infrastructure] --> [persistence.jnosql]
+
+@enduml

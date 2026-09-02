@@ -1,0 +1,35 @@
+@startuml
+title Spring Platform projects
+
+package "Core Infrastructure Projects" {
+    [Spring Framework]
+    [Spring Boot]
+    [Project Reactor]
+    [Spring Security]
+    [Spring Session]
+    [Spring Integration]
+    [Spring Batch]
+    [Spring Modulith]
+}
+package "Data Operations and Management Projects" {
+    [Spring Data]
+    [Spring AMQP]
+    [Spring for Apache Kafka]
+    [Spring for Apache Pulsar]
+    [Spring LDAP]
+}
+package "Cloud Technologies Projects" {
+    [Spring Cloud]
+    [Spring AI]
+    [Spring gRPC]
+    [Micrometer]
+}
+package "Other Projects" {
+    [Spring for GraphQL]
+    [Spring HATEOAS]
+    [Spring REST Docs]
+    [Spring Shell]
+    [Spring Web Services]
+    [Spring Web Flow]
+}
+@enduml

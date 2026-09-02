@@ -1,0 +1,24 @@
+@startuml
+
+title Package structure for our domain model
+
+left to right direction
+
+package {
+    [domain]
+}
+package {
+    [aggregates]
+}
+package {
+    [entities]
+}
+package {
+    [valueobjects]
+}
+
+[domain] --> [aggregates]
+[domain] --> [entities]
+[domain] --> [valueobjects]
+
+@enduml

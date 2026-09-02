@@ -1,0 +1,34 @@
+@startuml
+
+title Package structure for interfaces
+
+left to right direction
+
+package {
+    [interfaces]
+}
+package {
+    [web]
+}
+package {
+    [rest]
+}
+package {
+    [socket]
+}
+package {
+    [file]
+}
+package {
+    [viewadapters]
+}
+
+[interfaces] --> [web]
+[interfaces] --> [rest]
+[interfaces] --> [socket]
+[interfaces] --> [file]
+[web] --> [viewadapters]
+[rest] --> [viewadapters]
+[socket] --> [viewadapters]
+[file]
+@enduml

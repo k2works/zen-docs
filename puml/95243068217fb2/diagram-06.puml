@@ -1,0 +1,36 @@
+@startuml
+
+title Package structure for Application services
+
+left to right direction
+
+package {
+    [application]
+}
+package {
+    [transform]
+}
+package {
+    [sagas]
+}
+package {
+    [internal]
+}
+package {
+    [commands]
+}
+package {
+    [queries]
+}
+package {
+    [events]
+}
+
+[transform] <- [application]
+[application] -> [sagas]
+[application] --> [internal]
+[internal] --> [commands]
+[internal] --> [queries]
+[internal] --> [events]
+
+@enduml

@@ -1,0 +1,42 @@
+@startuml
+
+title モジュラーモノリスプラットフォーム要求
+
+package "Monolith Platform" {
+    package "Business Logic Patterns" {
+        [API Development]
+        [Domain Model]
+        [Data Processing]
+        [Data Management]
+        [Documentation]
+    }
+    package "Communication Patterns" {
+        [Synchronous Communication]
+        [Asynchronous Communication]
+        [Domain Events]
+        [Anti-Corruption Layer]
+        [Messaging Integration]
+    }
+    package "Distributed Transaction Management Patterns" {
+        [Local ACID Transaction]
+        [Transaction Propagation]
+        [Transactional Event Publication]
+        [Saga]
+    }
+    package "Deployment Patterns" {
+        [Single Deployment Unit]
+        [Executable JAR]
+        [Container Image]
+        [Externalized Configuration]
+        [Database Migration]
+    }
+    package "Readiness Patterns" {
+        [Health Check]
+        [Metrics]
+        [Info Endpoint]
+        [Logging]
+        [Distributed Tracing]
+    }
+}
+
+@enduml

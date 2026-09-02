@@ -1,0 +1,28 @@
+@startuml
+title DDD artifact implementation summary using Spring Platform
+
+
+rectangle {
+usecase Aggregates
+usecase Entities
+usecase ValueObjects
+}
+
+rectangle {
+usecase Commands
+usecase Queries
+usecase Events
+}
+
+rectangle {
+usecase ApplicationServices
+usecase InboundServices
+usecase OutboundServices
+}
+
+rectangle {
+usecase MyBatisSpringStarter
+usecase SpringDI
+}
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+title モジュラーモノリス Cargo Tracker Application
+
+left to right direction
+
+package 解決領域 {
+   [Booking Bounded Context]
+   [Tracking Bounded Context]
+   [Routing Bounded Context]
+   [Handling Bounded Context]
+}
+
+package "Cargo Tracker Monolith" {
+   [Booking Module]
+   [Routing Module]
+   [Tracking Module]
+   [Handling Module]
+}
+
+database DB [
+   Centralized DB
+]
+
+[Booking Bounded Context] --> "Booking Module"
+[Routing Bounded Context] --> "Routing Module"
+[Tracking Bounded Context] --> "Tracking Module"
+[Handling Bounded Context] --> "Handling Module"
+"Cargo Tracker Monolith" --> DB
+@enduml

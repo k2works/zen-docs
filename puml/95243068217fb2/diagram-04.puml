@@ -1,0 +1,29 @@
+@startuml
+
+title Bounded Context Artifact
+
+left to right direction
+
+package {
+ [interfaces]
+}
+package {
+ [application]
+}
+package { 
+ [domain]
+}
+package {
+ [infrastructure]
+}
+
+artifact "Inbound Adapter(s)"
+artifact "Application Services"
+artifact "Domain Model"
+artifact "Outbound Adapter(s)"
+
+interfaces --> "Inbound Adapter(s)"
+application --> "Application Services"
+domain --> "Domain Model"
+infrastructure --> "Outbound Adapter(s)"
+@enduml
